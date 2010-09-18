@@ -141,22 +141,6 @@ if RUBY_VERSION < "1.9"
       if defined? ActiveRecord::Base
         ActiveRecord::Base.logger = RAILS_DEFAULT_LOGGER
       end
-    
-      # This has been added so you can type URL convience methods in at
-      # the prompt and get back the proper URL string. (Brian Landau)
-      # require 'action_controller/test_process'
-      # if @controller.nil?
-      #   @controller = ApplicationController.new
-      # end
-      # if defined?(ActionController::TestRequest) && defined?(ActionController::TestResponse)
-      #   @request = ActionController::TestRequest.new
-      #   @response = ActionController::TestResponse.new
-      #   @controller.request = @request
-      #   @controller.response = @response
-      #   @controller.send :initialize_template_class, @response
-      #   @controller.send :assign_shortcuts, @request, @response
-      #   @controller.send :initialize_current_url
-      # end
       
       if defined?(ActionController::UrlWriter)
         include ActionController::UrlWriter
