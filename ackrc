@@ -1,0 +1,6 @@
+--ignore-dir=.rsync_cache
+--type-set=sass=.sass
+--type-set=scss=.scss
+--type-set=rjs=.rjs
+--type-set=erb=.erb
+--type=nosql

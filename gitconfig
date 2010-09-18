@@ -1,0 +1,43 @@
+[color]
+  diff = auto
+  interactive = auto
+  status = auto
+  branch = auto
+  grep = auto
+  showbranch = auto
+  ui = auto
+[alias]
+  ffs = flow feature start
+  fff = flow feature finish
+  fhs = flow hotfix start
+  fhf = flow hotfix finish
+  cam = commit -am
+  al = add --all
+  mt = mergetool
+  dt = difftool
+[user]
+    email = brianjlandau@gmail.com
+    name = Brian Landau
+[git-tmbundle]
+  gitnub-path = /usr/local/bin/nub
+[github]
+  user = brianjlandau
+  token = ***REMOVED***
+[core]
+  editor = "mate -rw"
+[gui]
+  recentrepo = /Users/brianlandau/rails/viget/reaper
+[svn]
+  rmdir = true
+[merge]
+  tool = opendiff
+[diff]
+  tool = Kaleidoscope
+[mergetool]
+  keepBackup = false
+[difftool "Kaleidoscope"]
+  cmd = ksdiff-wrapper git \"$LOCAL\" \"$REMOTE\"
+[difftool]
+  prompt = false
+[mergetool]
+  prompt = false
