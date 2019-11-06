@@ -27,24 +27,24 @@
     local LC_ALL=${${(@M)$(locale -a):#*.(utf|UTF)(-|)8}[1]:-en_US.UTF-8}
   fi
 
-  POWERLEVEL9K_MODE='nerdfont-complete'
-  POWERLEVEL9K_DIR_DEFAULT_FOREGROUND="144"
-  POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND="144"
-  POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND="025"
-  POWERLEVEL9K_DIR_ETC_BACKGROUND="blueviolet"
-  POWERLEVEL9K_DIR_ETC_FOREGROUND="grey85"
-  POWERLEVEL9K_DIR_HOME_FOREGROUND="grey85"
-  POWERLEVEL9K_RBENV_FOREGROUND="014"
-  POWERLEVEL9K_RBENV_BACKGROUND="darkviolet"
-  POWERLEVEL9K_NVM_FOREGROUND="151"
-  POWERLEVEL9K_NVM_BACKGROUND="166"
-  POWERLEVEL9K_STATUS_VERBOSE=false
-  POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
-  POWERLEVEL9K_VCS_GIT_HOOKS=(vcs-detect-changes git-untracked git-aheadbehind git-remotebranch git-tagname)
-  POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX="%F{blue}\u256D\u2500%F{white}"
-  POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%F{blue}\u2570\uf460%F{white} "
-  POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon dir vcs newline nvm rbenv prompt_char)
-  POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(public_ip context newline status command_execution_time root_indicator background_jobs time)
+  typeset -g POWERLEVEL9K_MODE=nerdfont-complete
+  typeset -g POWERLEVEL9K_DIR_DEFAULT_FOREGROUND="144"
+  typeset -g POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND="144"
+  typeset -g POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND="025"
+  typeset -g POWERLEVEL9K_DIR_ETC_BACKGROUND="blueviolet"
+  typeset -g POWERLEVEL9K_DIR_ETC_FOREGROUND="grey85"
+  typeset -g POWERLEVEL9K_DIR_HOME_FOREGROUND="grey85"
+  typeset -g POWERLEVEL9K_RBENV_FOREGROUND="014"
+  typeset -g POWERLEVEL9K_RBENV_BACKGROUND="darkviolet"
+  typeset -g POWERLEVEL9K_NVM_FOREGROUND="151"
+  typeset -g POWERLEVEL9K_NVM_BACKGROUND="166"
+  typeset -g POWERLEVEL9K_STATUS_VERBOSE=false
+  typeset -g POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
+  typeset -g POWERLEVEL9K_VCS_GIT_HOOKS=(vcs-detect-changes git-untracked git-aheadbehind git-remotebranch git-tagname)
+  typeset -g POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX="%F{blue}\u256D\u2500%F{white}"
+  typeset -g POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%F{blue}\u2570\uf460%F{white} "
+  typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon dir vcs newline nvm rbenv prompt_char)
+  typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(public_ip context newline status command_execution_time root_indicator background_jobs time)
 
   # typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
   #     # =========================[ Line #1 ]=========================
@@ -125,7 +125,7 @@
   #
   # Note: Many default icons cannot be displayed with system fonts. You'll need to install a
   # capable font to use them. See POWERLEVEL9K_MODE below.
-  typeset -g POWERLEVEL9K_VISUAL_IDENTIFIER_EXPANSION='${P9K_VISUAL_IDENTIFIER}'
+  # typeset -g POWERLEVEL9K_VISUAL_IDENTIFIER_EXPANSION='${P9K_VISUAL_IDENTIFIER}'
 
   # This option makes a difference only when default icons are enabled for all or some prompt
   # segments (see POWERLEVEL9K_VISUAL_IDENTIFIER_EXPANSION above). LOCK_ICON can be printed as
