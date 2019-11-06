@@ -3,4 +3,8 @@
 --type-set=scss=.scss
 --type-set=rjs=.rjs
 --type-set=erb=.erb
+--type-set=io=.io
+--type-set=haml=.haml,.hamlc
+--type-set=jst=.jst
+--type-set=coffeescript=.coffee
 --type=nosql

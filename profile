@@ -3,108 +3,89 @@ set noclobber
 export LC_CTYPE="en_US.UTF-8"
 
 # Setup my personal shell scripts path
-PATH="/Users/brianlandau/bin"
+PATH="$HOME/bin"
 # add developer
-PATH="/Developer/usr/bin:/Developer/usr/sbin:$PATH"
+PATH="/usr/local/share/npm/bin:$PATH"
+# Add go
+PATH="/usr/local/Cellar/go/1.8.3/libexec/bin:$PATH"
 # add base path
 PATH="/usr/bin:/usr/sbin:/bin:/sbin:$PATH"
 # add X11 bin
 #PATH="/usr/X11/bin:$PATH"
 # Add Personal installs
 PATH="/usr/local/bin:/usr/local/sbin:$PATH"
-# User Ruby Gem bin directory
-# PATH="/Library/Ruby/bin:${PATH}"
-# Add MAMP PHP
-# PATH="/Applications/MAMP/bin/php5/bin:${PATH}"
-# Add DarwinPorts
-#PATH="/opt/local/bin:/opt/local/sbin:/opt/local/apache2/bin:$PATH"
-# ADD REE
-#PATH="/usr/local/ree/bin:$PATH"
+# LibreOffice
+# PATH=$PATH:/Applications/LibreOffice.app/Contents/MacOS
 export PATH
 
-export RUBY_HEAP_MIN_SLOTS=1000000
-export RUBY_HEAP_SLOTS_INCREMENT=1000000
-export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
-export RUBY_GC_MALLOC_LIMIT=1000000000
-export RUBY_HEAP_FREE_MIN=500000
+export GOPATH="$HOME/Projects/go-home"
+
+export RUBY_GC_HEAP_INIT_SLOTS=700000
+export RUBY_GC_HEAP_FREE_SLOTS=300000
+export RUBY_GC_HEAP_GROWTH_FACTOR=1.3
 
 
-#MANPATH="/opt/local/share/man:/opt/local/man:/usr/share/man:/usr/local/man"
-#export MANPATH
+# export AWS_RDS_HOME=~/bin/rds/
+# export PATH=$PATH:$AWS_RDS_HOME/bin
+export AWS_CREDENTIAL_FILE=~/.aws/credentials
 
-# INFOPATH="/opt/local/share/info:/usr/share/info"
-# export INFOPATH
-
-export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home/
-
-export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
-
-export RUBYOPT=rubygems
-# export RUBYLIB="/Library/Ruby/Site/1.8:/Library/Ruby/Gems/1.8/gems"
-# export GEM_PATH="/Library/Ruby/Gems/1.8"
-# export GEM_HOME="/Library/Ruby/Gems/1.8"
-export GEMDIR=`gem env gemdir`
-
-# -- start rip config -- #
-RIPDIR=/Users/brianlandau/.rip
-RUBYLIB="$RUBYLIB:$RIPDIR/active/lib"
-PATH="$PATH:$RIPDIR/active/bin"
-export RIPDIR RUBYLIB PATH
-# -- end rip config -- #
+# Start Boid configuration
+# BOIDDIR=/Users/brianlandau/.boid
+# IOIMPORT="$IOIMPORT:$BOIDDIR/active/lib"
+# PATH="$PATH:$BOIDDIR/active/bin"
+# export BOIDDIR IOIMPORT PATH
+# End Boid configuration
 
 # History control
-HISTFILESIZE=10000
+HISTFILESIZE=100000
 export HISTFILESIZE
-HISTSIZE=10000
+HISTSIZE=100000
 export HISTSIZE
-HISTCONTROL=erasedups
+HISTCONTROL=ignoredups:erasedups
 export HISTCONTROL
 shopt -s histappend
 
-GIT_EDITOR="mate -rw"
-export GIT_EDITOR
+_bash_history_sync() {
+  builtin history -a         #1
+  HISTFILESIZE=$HISTSIZE     #2
+  builtin history -c         #3
+  builtin history -r         #4
+}
 
-export EC2_HOME="/Users/brianlandau/.ec2"
-export PATH=$PATH:$EC2_HOME/bin
-export EC2_PRIVATE_KEY="$EC2_HOME/pk-D6ONQIZ22DX3SX5QOPP4B5WIF4PN4T2E.pem"
-export EC2_CERT="$EC2_HOME/cert-D6ONQIZ22DX3SX5QOPP4B5WIF4PN4T2E.pem"
-export ODEO_AWS_ACCESS_KEY="1EPQ0AM31F3ZHMHJVKR2"
-export ODEO_AWS_SECRET_KEY="BI30mhWVADbGMzfLY66a+yLO/MCkKpONEFbXToco"
+history() {                  #5
+  _bash_history_sync
+  builtin history "$@"
+}
+
+export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}_bash_history_sync;"
+
+GIT_EDITOR="atom -wn"
+export GIT_EDITOR
 
 # command alias's
 alias cd="pushd"
-alias tree='tree -FC'
-alias tmbup="svn up *.tmbundle"
-alias supup="svn up Support"
-alias hgre="hg rename -A "
-alias mate="mate -r"
-alias sscm="/Users/brianlandau/bin/sscm/sscm.rb"
-alias irb='irb --readline'
-alias apinfo='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport'
-alias ajaxrdoc="/usr/bin/rdoc --fmt ajax --exclude .*generator.* --exclude .*test.* --exclude .*spec.* --exclude .*pkg.*"
-alias rhino="java org.mozilla.javascript.tools.shell.Main"
 
 # command shortcuts
-alias ..="cd .."
 alias llc="ls -Falh"
 alias ll="ls -Falh | less -eg"
 alias h?="history|grep"
-alias punin="sudo port -f uninstall"
-alias gsd='git svn dcommit'
-alias gsr='git svn rebase'
 alias gstat='git status'
 alias h='history'
-alias sc='script/console'
-alias ss='script/server'
 alias trest='touch tmp/restart.txt'
 alias dir?="ls -1aF | grep"
 alias tf='tail -f -n 160'
 alias tfdev='tail -f -n 160 log/development.log'
-alias senv64='sudo env ARCHFLAGS="-arch x86_64"'
+alias be='bundle exec'
+alias brk='bin/rake'
+alias bra='bin/rails'
+alias brg='bin/rails g'
+alias brs='bin/rails s'
+alias brc='bin/rails c'
+alias bss='bin/spring stop'
+alias bu='brew upgrade'
+alias bcl='brew cleanup'
+alias bot="brew outdated | tail"
 
-# directory alias's
-alias gemsdir="cd $GEMDIR/gems"
-alias rplugins="cd ~/rails/plugindev/vendor/plugins/"
 
 # project alias's
 PROJECT_PARENT_DIRS[0]="$HOME/Projects"
@@ -132,69 +113,12 @@ for PARENT_DIR in ${PROJECT_PARENT_DIRS[@]} ; do
   fi
 done
 
-. ~/Projects/git-prompt/git-prompt.sh
+# . ~/Projects/git-prompt/git-prompt.sh
+powerline-daemon -q
+POWERLINE_BASH_CONTINUATION=1
+POWERLINE_BASH_SELECT=1
+. ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/bash/powerline.sh
 
-
-# Color stuff:
-# DULL=0
-# BRIGHT=1
-# 
-# FG_BLACK=30
-# FG_RED=31
-# FG_GREEN=32
-# FG_YELLOW=33
-# FG_BLUE=34
-# FG_VIOLET=35
-# FG_CYAN=36
-# FG_WHITE=37
-# 
-# FG_NULL=00
-# 
-# BG_BLACK=40
-# BG_RED=41
-# BG_GREEN=42
-# BG_YELLOW=43
-# BG_BLUE=44
-# BG_VIOLET=45
-# BG_CYAN=46
-# BG_WHITE=47
-# 
-# BG_NULL=00
-# 
-# ##
-# # ANSI Escape Commands
-# ##
-# ESC_CHAR="\033"
-# NORMAL_ESCAPE="\[$ESC_CHAR[m\]"
-# RESET_ESCAPE="\[$ESC_CHAR[${DULL};${FG_WHITE};${BG_NULL}m\]"
-# 
-# ##
-# # Shortcuts for Colored Text ( Bright and FG Only )
-# ##
-# 
-# # DULL TEXT
-# 
-# BLACK="\[$ESC_CHAR[${DULL};${FG_BLACK}m\]"
-# RED="\[$ESC_CHAR[${DULL};${FG_RED}m\]"
-# GREEN="\[$ESC_CHAR[${DULL};${FG_GREEN}m\]"
-# YELLOW="\[$ESC_CHAR[${DULL};${FG_YELLOW}m\]"
-# BLUE="\[$ESC_CHAR[${DULL};${FG_BLUE}m\]"
-# VIOLET="\[$ESC_CHAR[${DULL};${FG_VIOLET}m\]"
-# CYAN="\[$ESC_CHAR[${DULL};${FG_CYAN}m\]"
-# WHITE="\[$ESC_CHAR[${DULL};${FG_WHITE}m\]"
-# 
-# # BRIGHT TEXT
-# BRIGHT_BLACK="\[$ESC_CHAR[${BRIGHT};${FG_BLACK}m\]"
-# BRIGHT_RED="\[$ESC_CHAR[${BRIGHT};${FG_RED}m\]"
-# BRIGHT_GREEN="\[$ESC_CHAR[${BRIGHT};${FG_GREEN}m\]"
-# BRIGHT_YELLOW="\[$ESC_CHAR[${BRIGHT};${FG_YELLOW}m\]"
-# BRIGHT_BLUE="\[$ESC_CHAR[${BRIGHT};${FG_BLUE}m\]"
-# BRIGHT_VIOLET="\[$ESC_CHAR[${BRIGHT};${FG_VIOLET}m\]"
-# BRIGHT_CYAN="\[$ESC_CHAR[${BRIGHT};${FG_CYAN}m\]"
-# BRIGHT_WHITE="\[$ESC_CHAR[${BRIGHT};${BG_WHITE}m\]"
-# 
-# PS1="${BRIGHT_BLUE}[${VIOLET}\u${BRIGHT_BLUE}]${YELLOW}: ${WHITE}\w ${NORMAL_ESCAPE}\$ ${RESET_ESCAPE}"
-# export PS1
 
 export PS4='+${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]}: '
 
@@ -210,11 +134,16 @@ export GREP_COLOR='1;34;43'
 
 
 # include Bash Completion Library
-if [ -f `brew --prefix`/etc/bash_completion ]; then
-  . `brew --prefix`/etc/bash_completion
+HOMEBREW_PREFIX=$(brew --prefix)
+if type brew &>/dev/null; then
+  if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
+    source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
+  else
+    for COMPLETION in "${HOMEBREW_PREFIX}/etc/bash_completion.d/"*; do
+      [[ -r "$COMPLETION" ]] && source "$COMPLETION"
+    done
+  fi
 fi
-
-. ~/bin/z.sh
 
 export COMP_WORDBREAKS=${COMP_WORDBREAKS/\:/}
 
@@ -223,19 +152,6 @@ _rakecomplete() {
   return 0
 }
 complete -o default -o nospace -F _rakecomplete rake
-
-_thorcomplete() {
-  COMPREPLY=($(compgen -W "`thor -T | grep -v "^\-\+\|Tasks" | awk '{{print $1}}'`" -- ${COMP_WORDS[COMP_CWORD]}))
-}
-complete -o default -o nospace -F _thorcomplete thor
-
-_sakecomplete() {
-  COMPREPLY=($(compgen -W "`rake -s -T | awk '{{print $2}}'`" -- ${COMP_WORDS[COMP_CWORD]}))
-  return 0
-}
-complete -o default -o nospace -F _sakecomplete sake
-
-complete -C "/usr/bin/gemedit --complete" gemedit
 # /bash completion
 
 pman(){
@@ -246,54 +162,10 @@ tflog (){
 	tf log/$1.log
 }
 
-tmup(){
-	cd /Applications/TextMate.app/Contents
-	svn up PlugIns
-	cd SharedSupport
-	supup
-	svn up Themes
-	cd Bundles
-	tmbup
-	cd /Library/Application\ Support/TextMate/Bundles
-	tmbup
-	echo "All done updating TextMate."
-}
-
-retm(){
-	echo "Updating TextMate App contents..."
-	cd /Applications/TextMate.app/Contents
-	rm -fR PlugIns
-	svn co http://svn.textmate.org/trunk/PlugIns
-	echo "- PlugIns folder updated"
-	cd SharedSupport
-	rm -fR Support
-	svn co http://svn.textmate.org/trunk/Support
-	echo "- Support folder updated"
-	rm -fR Themes
-	svn co http://svn.textmate.org/trunk/Themes
-	echo "- Themes updated"
-	cd Bundles
-	IFS="
-	"
-	for bundle in $(ls -1)
-	do
-	  bundleName=${bundle// /\ }
-	  if rm -fR $bundleName
-	  then
-	    echo "- Old $bundleName Deleted"
-	    svn co http://svn.textmate.org/trunk/Bundles/$bundleName
-	  else
-	    echo "Error Deleting "$bundleName
-	  fi
-	  echo "- Bundle $bundleName update."
-	done
-	echo "All done updating TextMate."
-}
-
 function gr {
-    ## If the current working directory is inside of 
+    ## If the current working directory is inside of
     ## a git repository, this function will change
-    ## it to the git root (ie, the directory that 
+    ## it to the git root (ie, the directory that
     ## contains the .git/ directory), and then print
     ## the new directory.
 
@@ -308,13 +180,91 @@ link_dotfiles() {
 	done
 }
 
-export EDITOR='mate -wr'
+run_spec(){
+  bundle exec rspec spec/$1_spec.rb
+  terminal-notifier -message "Tests are done!" -title "rspec" -sound Glass -group "rspec:$(pwd)" -activate "com.apple.Terminal"
+}
+
+run_specs(){
+  bundle exec rspec "$@"
+  terminal-notifier -message "Tests are done!" -title "rspec" -sound Glass -group "rspec:$(pwd)" -activate "com.apple.Terminal"
+}
+
+run_all_specs(){
+  bin/rake spec
+  terminal-notifier -message "Tests are done!" -title "rspec" -sound Glass -group "rspec:$(pwd)" -activate "com.apple.Terminal"
+}
+
+run_controller_spec(){
+  run_spec controllers/$1_controller
+}
+
+run_helper_spec(){
+  run_spec helpers/$1_helper
+}
+
+run_lib_spec(){
+  run_spec lib/$1
+}
+
+run_model_spec(){
+  run_spec models/$1
+}
+
+run_routing_spec(){
+  run_spec routing/$1_routing
+}
+
+run_request_spec(){
+  run_spec requests/$1
+}
+
+run_feature_spec(){
+  run_spec features/$1
+}
+
+run_mailer_spec(){
+  run_spec mailers/$1
+}
+
+alias rcs=run_controller_spec
+alias rhs=run_helper_spec
+alias rls=run_lib_spec
+alias rms=run_model_spec
+alias rrs=run_request_spec
+alias rfs=run_feature_spec
+alias rss=run_specs
+alias ras=run_all_specs
+
+export EDITOR='atom -wn'
 
 if [ -f ~/.amazon_keys ]; then
   . ~/.amazon_keys
 fi
 
-[[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
+. `brew --prefix`/etc/profile.d/z.sh
+
+eval "$(rbenv init -)"
+
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
+
+if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+
+test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
 
 echo "$(uname -s) $(uname -r) $(uname -p)"
 echo "$BASH - $BASH_VERSION"
+
+# Add the following to your ~/.bashrc or ~/.zshrc
+hitch() {
+  command hitch "$@"
+  if [[ -s "$HOME/.hitch_export_authors" ]] ; then source "$HOME/.hitch_export_authors" ; fi
+}
+alias unhitch='hitch -u'
+# Uncomment to persist pair info between terminal instances
+# hitch
+
+{ eval `ssh-agent`; ssh-add -A; } &>/dev/null
+
+archey -c -o

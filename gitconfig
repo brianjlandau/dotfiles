@@ -11,33 +11,63 @@
   fff = flow feature finish
   fhs = flow hotfix start
   fhf = flow hotfix finish
-  cam = commit -am
+  cam = commit -aSm
+  ca = commit -a -S
   al = add --all
   mt = mergetool
   dt = difftool
+  lg = log --oneline --grep
+  fdifm = diff --name-status master
+	pr = pull --rebase
+  short-name-status = show --pretty=short --name-status
 [user]
-    email = brianjlandau@gmail.com
-    name = Brian Landau
-[git-tmbundle]
-  gitnub-path = /usr/local/bin/nub
+	email = brianjlandau@gmail.com
+	name = Brian Landau
+	signingkey = 205DC0856F65DFE1
 [github]
   user = brianjlandau
   token = ***REMOVED***
 [core]
-  editor = "mate -rw"
-[gui]
-  recentrepo = /Users/brianlandau/rails/viget/reaper
+  editor = "atom -wn"
+	excludesfile = /Users/brianlandau/.gitignore_global
 [svn]
   rmdir = true
 [merge]
-  tool = opendiff
+	tool = Kaleidoscope
 [diff]
-  tool = Kaleidoscope
+	tool = Kaleidoscope
 [mergetool]
   keepBackup = false
 [difftool "Kaleidoscope"]
-  cmd = ksdiff-wrapper git \"$LOCAL\" \"$REMOTE\"
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [difftool]
-  prompt = false
+	prompt = false
 [mergetool]
-  prompt = false
+	prompt = false
+[push]
+	default = upstream
+[rerere]
+	enabled = true
+[branch]
+	autosetuprebase = always
+[rebase]
+	stat = true
+[mergetool "Kaleidoscope"]
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+	trustExitCode = true
+[pull]
+	rebase = true
+[filter "media"]
+	required = true
+	clean = git media clean %f
+	smudge = git media smudge %f
+[heroku]
+	account = personal
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
+[commit]
+	gpgsign = true
+[credential]
+	helper = osxkeychain

@@ -1,34 +1,47 @@
 require 'irb/ext/save-history'
 require 'rubygems'
 require 'pp'
-require 'ap'
-# require 'irb/completion'
-require 'bond'
-Bond.start
+require 'pathname'
+require 'fileutils'
+
+begin
+  require 'ap'
+rescue LoadError
+end
+
+begin
+  require 'bond'
+  Bond.start
+rescue LoadError
+  require 'irb/completion'
+end
+
 if RUBY_VERSION < "1.9"
-  require 'wirble'
-  require 'utility_belt'
-  require 'sketches'
-  require 'pathname'
-  require 'fileutils'
+  begin
+    require 'wirble'
+    Wirble.init
+    Wirble.colorize
+  rescue LoadError
+  end
+  
+  begin
+    require 'utility_belt'
+  rescue LoadError
+  end
+  
+  begin
+    require 'sketches'
+    Sketches.config :editor => 'mate'
+  rescue LoadError
+  end
   # require 'facets/yaml'
   # require 'parse_tree'
   # require 'parse_tree_extensions'
   # require 'ruby2ruby'
-else
-  require 'pathname'
-  require 'fileutils'
 end
 
 IRB.conf[:USE_READLINE] = true
 IRB.conf[:SAVE_HISTORY] = 2500
-
-if RUBY_VERSION < "1.9"
-  Wirble.init
-  Wirble.colorize
-  Sketches.config :editor => 'mate'
-end
-
 IRB.conf[:PROMPT_MODE] = :DEFAULT
 
 include FileUtils::Verbose
@@ -135,16 +148,16 @@ if RUBY_VERSION < "1.9"
     IRB.conf[:PROMPT_MODE] = :RAILS
     RAILS_DEFAULT_LOGGER = Logger.new(STDOUT)
 
-    IRB.conf[:IRB_RC] = Proc.new do
-      # Called after the irb session is initialized and Rails has
-      # been loaded (props: Mike Clark).
-      if defined? ActiveRecord::Base
-        ActiveRecord::Base.logger = RAILS_DEFAULT_LOGGER
-      end
-      
-      if defined?(ActionController::UrlWriter)
-        include ActionController::UrlWriter
-      end
-    end
+    # IRB.conf[:IRB_RC] = Proc.new do
+    #   # Called after the irb session is initialized and Rails has
+    #   # been loaded (props: Mike Clark).
+    #   if defined? ActiveRecord::Base
+    #     ActiveRecord::Base.logger = RAILS_DEFAULT_LOGGER
+    #   end
+    #   
+    #   if defined?(ActionController::UrlWriter)
+    #     include ActionController::UrlWriter
+    #   end
+    # end
   end
 end

@@ -1,0 +1,33 @@
+{
+	"segments": {
+		"right": [
+			{
+				"function": "powerline.segments.common.sys.cpu_load_percent",
+				"priority": 50,
+				"before": "\uf98a "
+			},
+			{
+				"function": "powerline.segments.common.net.network_load",
+				"priority": 20
+			}
+		]
+	},
+	"dividers": {
+		"left": {
+			"hard": "\uE0B4 ",
+			"soft": "\uE0CE "
+		},
+		"right": {
+			"hard": " \uE0C7",
+			"soft": " \uE0B7"
+		}
+	},
+	"segment_data": {
+		"powerline.segments.common.net.network_load": {
+			"args": {
+				"recv_format": " \uf0ab {value:>8}",
+				"sent_format": " \uf0aa {value:>8}"
+			}
+		}
+	}
+}

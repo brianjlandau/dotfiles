@@ -1,13 +1,10 @@
---- 
+---
 :benchmark: false
-gem: --no-ri
+gem: --no-ri --no-rdoc --no-document
 :update_sources: true
 gemcutter_key: b6e589ac105d13ea9a9d7600e6156203
 :backtrace: true
-:sources: 
+:sources:
 - http://rubygems.org
-- http://gems.rubyonrails.org
-- http://gems.github.com/
 :bulk_threshold: 5000
 :verbose: true
-rdoc: -a --fmt shtml -T direct
