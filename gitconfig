@@ -11,7 +11,7 @@
   fff = flow feature finish
   fhs = flow hotfix start
   fhf = flow hotfix finish
-  cam = commit -aSm
+  cam = commit -S -am
   ca = commit -a -S
   al = add --all
   mt = mergetool
