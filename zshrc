@@ -12,6 +12,9 @@ setopt pushdminus
 
 export DIRSTACKSIZE=12
 
+export LC_CTYPE="en_US.UTF-8"
+export LANG="en_US.UTF-8"
+
 # Completion config
 autoload -Uz compinit
 
@@ -37,9 +40,6 @@ if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
 fi
 # /Completion config
-
-export LC_CTYPE="en_US.UTF-8"
-export LANG="en_US.UTF-8"
 
 # PATH config
 PATH="/usr/local/sbin:$PATH"
@@ -126,6 +126,9 @@ fi
 
 zplug load
 # /ZPLUG config
+
+# Someother ZSH modules
+zmodload -i zsh/clone
 
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
@@ -218,7 +221,7 @@ export GREP_OPTIONS
 GIT_EDITOR="atom -wn"
 export GIT_EDITOR
 
-export EDITOR='atom -wn'
+export EDITOR='atom -n'
 
 tflog (){
 	tf log/$1.log
