@@ -70,6 +70,14 @@ setopt HIST_REDUCE_BLANKS
 setopt extended_history
 # /History config
 
+cycle_prompt_char() {
+  typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_VIINS_CONTENT_EXPANSION=${default_prompt_symbols[$(( $RANDOM % ${#default_prompt_symbols[@]} + 1 ))]}
+}
+
+cycle_error_prompt_char() {
+  typeset -g POWERLEVEL9K_PROMPT_CHAR_ERROR_VIINS_CONTENT_EXPANSION=${error_prompt_symbols[$(( $RANDOM % ${#error_prompt_symbols[@]} + 1 ))]}
+}
+
 # POWERLEVEL9K theme config
 # Using p10k for now
 # POWERLEVEL9K_MODE='nerdfont-complete'
@@ -125,8 +133,10 @@ bindkey '^[[B' history-substring-search-down
 alias llc="ls -Falh"
 alias tf='tail -f -n 160'
 alias h='history'
+alias "h?"="fc -l 0 -1 | grep"
 alias cls="colorls -A --gs"
 alias cllc="colorls -Al --gs"
+alias mux="tmuxinator"
 
 # Ruby stuff
 alias be='bundle exec'
@@ -236,6 +246,10 @@ export AWS_CREDENTIAL_FILE=~/.aws/credentials
 
 if [ -f ~/.amazon_keys ]; then
   . ~/.amazon_keys
+fi
+
+if [ -f ~/.github_keys ]; then
+  . ~/.github_keys
 fi
 
 # Shell extensions

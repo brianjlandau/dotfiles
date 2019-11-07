@@ -38,7 +38,7 @@
   typeset -g POWERLEVEL9K_RBENV_BACKGROUND="darkviolet"
   typeset -g POWERLEVEL9K_NVM_FOREGROUND="151"
   typeset -g POWERLEVEL9K_NVM_BACKGROUND="166"
-  typeset -g POWERLEVEL9K_STATUS_VERBOSE=false
+  typeset -g POWERLEVEL9K_STATUS_VERBOSE=true
   typeset -g POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
   typeset -g POWERLEVEL9K_VCS_GIT_HOOKS=(vcs-detect-changes git-untracked git-aheadbehind git-remotebranch git-tagname)
   typeset -g POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX="%F{blue}\u256D\u2500%F{white}"
@@ -216,8 +216,10 @@
   # Red prompt symbol if the last command failed.
   typeset -g POWERLEVEL9K_PROMPT_CHAR_ERROR_{VIINS,VICMD,VIVIS}_FOREGROUND=196
   # Default prompt symbol.
-  default_prompt_symbols=(" " " " " " " ﱬ" " " " ﱲ" " 卵" " ﮊ" " ⚡")
-  typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VIINS_CONTENT_EXPANSION=${default_prompt_symbols[$(( $RANDOM % ${#default_prompt_symbols[@]} + 1 ))]}
+  default_prompt_symbols=(" " " " " " " 卵" " " " " " " " ﯀" " " " " " ❇︎" " ❯" " ﮸")
+  typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_VIINS_CONTENT_EXPANSION=${default_prompt_symbols[$(( $RANDOM % ${#default_prompt_symbols[@]} + 1 ))]}
+  error_prompt_symbols=(" " " "  " ﮊ" " ⚡" " ")
+  typeset -g POWERLEVEL9K_PROMPT_CHAR_ERROR_VIINS_CONTENT_EXPANSION=${error_prompt_symbols[$(( $RANDOM % ${#error_prompt_symbols[@]} + 1 ))]}
   # Prompt symbol in command vi mode.
   typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VICMD_CONTENT_EXPANSION=' ❮'
   # Prompt symbol in visual vi mode.
@@ -469,20 +471,20 @@
   # # it will signify error by turning red.
   typeset -g POWERLEVEL9K_STATUS_ERROR=true
   typeset -g POWERLEVEL9K_STATUS_ERROR_FOREGROUND=160
-  typeset -g POWERLEVEL9K_STATUS_ERROR_VISUAL_IDENTIFIER_EXPANSION='↵'
+  typeset -g POWERLEVEL9K_STATUS_ERROR_VISUAL_IDENTIFIER_EXPANSION=''
   #
   # # Status when the last command was terminated by a signal.
   typeset -g POWERLEVEL9K_STATUS_ERROR_SIGNAL=true
   typeset -g POWERLEVEL9K_STATUS_ERROR_SIGNAL_FOREGROUND=160
   # # Use terse signal names: "INT" instead of "SIGINT(2)".
   typeset -g POWERLEVEL9K_STATUS_VERBOSE_SIGNAME=false
-  typeset -g POWERLEVEL9K_STATUS_ERROR_SIGNAL_VISUAL_IDENTIFIER_EXPANSION='↵'
+  typeset -g POWERLEVEL9K_STATUS_ERROR_SIGNAL_VISUAL_IDENTIFIER_EXPANSION=''
   #
   # # Status when some part of a pipe command fails and the overall exit status is also non-zero.
   # # It may look like this: 1|0.
   typeset -g POWERLEVEL9K_STATUS_ERROR_PIPE=true
   typeset -g POWERLEVEL9K_STATUS_ERROR_PIPE_FOREGROUND=160
-  typeset -g POWERLEVEL9K_STATUS_ERROR_PIPE_VISUAL_IDENTIFIER_EXPANSION='↵'
+  typeset -g POWERLEVEL9K_STATUS_ERROR_PIPE_VISUAL_IDENTIFIER_EXPANSION=''
   #
   # ###################[ command_execution_time: duration of the last command ]###################
   # # Show duration of the last command if takes longer than this many seconds.
