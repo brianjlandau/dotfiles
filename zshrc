@@ -50,10 +50,6 @@ export PATH
 
 export GOPATH="$HOME/Projects/go-home"
 
-export RUBY_GC_HEAP_INIT_SLOTS=700000
-export RUBY_GC_HEAP_FREE_SLOTS=300000
-export RUBY_GC_HEAP_GROWTH_FACTOR=1.3
-
 # History config
 export HISTFILE="$HOME/.zsh_history"
 export SAVEHIST=100000
@@ -142,6 +138,10 @@ alias cllc="colorls -Al --gs"
 alias mux="tmuxinator"
 
 # Ruby stuff
+export RUBY_GC_HEAP_INIT_SLOTS=700000
+export RUBY_GC_HEAP_FREE_SLOTS=300000
+export RUBY_GC_HEAP_GROWTH_FACTOR=1.2
+
 alias be='bundle exec'
 alias brk='bin/rake'
 alias bra='bin/rails'
