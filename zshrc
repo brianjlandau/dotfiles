@@ -14,6 +14,7 @@ export DIRSTACKSIZE=12
 
 export LC_CTYPE="en_US.UTF-8"
 export LANG="en_US.UTF-8"
+export WORDCHARS="*?_-.[]~=&;!#$%^(){}<>"
 
 # Completion config
 autoload -Uz compinit
@@ -111,6 +112,8 @@ zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "zsh-users/zsh-history-substring-search", defer:3
 
 zplug "mafredri/zsh-async", use:"async.zsh", hook-load:"async_init"
+
+zplug "dijitalmunky/nvm-auto"
 
 zplug "romkatv/gitstatus"
 # zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme, as:theme
@@ -260,6 +263,7 @@ fi
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"
+nvm_auto_switch
 
  eval "$(rbenv init --no-rehash - zsh)"
 

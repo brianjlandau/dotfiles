@@ -27,7 +27,6 @@
     local LC_ALL=${${(@M)$(locale -a):#*.(utf|UTF)(-|)8}[1]:-en_US.UTF-8}
   fi
 
-  typeset -g POWERLEVEL9K_MODE=nerdfont-complete
   typeset -g POWERLEVEL9K_DIR_DEFAULT_FOREGROUND="144"
   typeset -g POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND="144"
   typeset -g POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND="025"
@@ -42,9 +41,10 @@
   typeset -g POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
   typeset -g POWERLEVEL9K_VCS_GIT_HOOKS=(vcs-detect-changes git-untracked git-aheadbehind git-remotebranch git-tagname)
   typeset -g POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX="%F{blue}\u256D\u2500%F{white}"
-  typeset -g POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%F{blue}\u2570\uf460%F{white} "
+  typeset -g POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%F{blue}\u2570\uf460%F{white}"
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon dir vcs newline nvm rbenv prompt_char)
   typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(public_ip newline status command_execution_time root_indicator background_jobs time)
+  typeset -g POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
 
   # typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
   #     # =========================[ Line #1 ]=========================
@@ -241,12 +241,12 @@
   # prefix. The shortened directory can be tab-completed to the original.
   # typeset -g POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_unique
   # Replace removed segment suffixes with this symbol.
-  # typeset -g POWERLEVEL9K_SHORTEN_DELIMITER=
+  typeset -g POWERLEVEL9K_SHORTEN_DELIMITER=
   # Color of the shortened directory segments.
   # typeset -g POWERLEVEL9K_DIR_SHORTENED_FOREGROUND=103
   # Color of the anchor directory segments. Anchor segments are never shortened. The first
   # segment is always an anchor.
-  # typeset -g POWERLEVEL9K_DIR_ANCHOR_FOREGROUND=39
+  typeset -g POWERLEVEL9K_DIR_ANCHOR_FOREGROUND="202"
   # Display anchor directory segments in bold.
   typeset -g POWERLEVEL9K_DIR_ANCHOR_BOLD=true
   # Don't shorten directories that contain any of these files. They are anchors.
