@@ -16,6 +16,13 @@ export LC_CTYPE="en_US.UTF-8"
 export LANG="en_US.UTF-8"
 export WORDCHARS="*?_-.[]~=&;!#$%^(){}<>"
 
+# PATH config
+PATH="/usr/local/sbin:$PATH"
+# Setup my personal shell scripts path
+PATH="$HOME/bin:$PATH"
+export PATH
+# /PATH config
+
 # Completion config
 autoload -Uz compinit
 
@@ -26,28 +33,19 @@ else
 	compinit -C
 fi
 
-autoload bashcompinit && bashcompinit
-
 bindkey '^i' menu-expand-or-complete
 
 zmodload -i zsh/complist
 zstyle ':completion:*' menu select=6
 zstyle ':completion::complete:*' use-cache 1
 zstyle ':completion::complete:*' cache-path $ZSH_CACHE_DIR
-zstyle ':completion:*' list-colors ''
+zstyle ':completion:*' list-colors 'exDxcxfxbxegedabaGaCaB'
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|=*'
 
 if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
 fi
 # /Completion config
-
-# PATH config
-PATH="/usr/local/sbin:$PATH"
-# Setup my personal shell scripts path
-PATH="$HOME/bin:$PATH"
-export PATH
-# /PATH config
 
 export GOPATH="$HOME/Projects/go-home"
 
@@ -66,6 +64,37 @@ setopt HIST_FIND_NO_DUPS
 setopt HIST_REDUCE_BLANKS
 setopt extended_history
 # /History config
+
+# ZPLUG config
+export ZPLUG_HOME=/usr/local/opt/zplug
+source $ZPLUG_HOME/init.zsh
+
+zplug "plugins/colored-man-pages", from:oh-my-zsh
+
+zplug "zsh-users/zsh-completions"
+zplug "zsh-users/zsh-syntax-highlighting", defer:2
+zplug "zsh-users/zsh-history-substring-search", defer:3
+
+zplug "mafredri/zsh-async", use:"async.zsh", hook-load:"async_init"
+
+zplug "dijitalmunky/nvm-auto"
+
+zplug "romkatv/gitstatus"
+# zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme, as:theme
+zplug "romkatv/powerlevel10k", as:theme, depth:1
+
+if ! zplug check; then
+  zplug install
+fi
+
+zplug load
+# /ZPLUG config
+
+# Someother ZSH modules
+zmodload -i zsh/clone
+
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
 
 cycle_prompt_char() {
   typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_VIINS_CONTENT_EXPANSION=${default_prompt_symbols[$(( $RANDOM % ${#default_prompt_symbols[@]} + 1 ))]}
@@ -99,38 +128,6 @@ cycle_error_prompt_char() {
 # POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon dir vcs newline nvm rbenv)
 # POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator background_jobs time)
 # /POWERLEVEL9K theme config
-
-# ZPLUG config
-export ZPLUG_HOME=/usr/local/opt/zplug
-source $ZPLUG_HOME/init.zsh
-
-zplug "plugins/colored-man-pages", from:oh-my-zsh
-zplug "plugins/colorize", from:oh-my-zsh
-
-zplug "zsh-users/zsh-completions"
-zplug "zsh-users/zsh-syntax-highlighting", defer:2
-zplug "zsh-users/zsh-history-substring-search", defer:3
-
-zplug "mafredri/zsh-async", use:"async.zsh", hook-load:"async_init"
-
-zplug "dijitalmunky/nvm-auto"
-
-zplug "romkatv/gitstatus"
-# zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme, as:theme
-zplug "romkatv/powerlevel10k", as:theme, depth:1
-
-if ! zplug check; then
-  zplug install
-fi
-
-zplug load
-# /ZPLUG config
-
-# Someother ZSH modules
-zmodload -i zsh/clone
-
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
 
 alias llc="ls -Falh"
 alias tf='tail -f -n 160'
@@ -275,8 +272,9 @@ if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 
 # Display some system info
 echo "$(uname -s) $(uname -r) $(uname -p)"
+echo "ZSH $ZSH_VERSION"
 
-archey -c -o
+# archey -c -o
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

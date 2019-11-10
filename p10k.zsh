@@ -30,13 +30,11 @@
   typeset -g POWERLEVEL9K_DIR_DEFAULT_FOREGROUND="144"
   typeset -g POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND="144"
   typeset -g POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND="025"
-  typeset -g POWERLEVEL9K_DIR_ETC_BACKGROUND="blueviolet"
+  typeset -g POWERLEVEL9K_DIR_ETC_BACKGROUND="057"
   typeset -g POWERLEVEL9K_DIR_ETC_FOREGROUND="grey85"
   typeset -g POWERLEVEL9K_DIR_HOME_FOREGROUND="grey85"
-  typeset -g POWERLEVEL9K_RBENV_FOREGROUND="014"
-  typeset -g POWERLEVEL9K_RBENV_BACKGROUND="darkviolet"
-  typeset -g POWERLEVEL9K_NVM_FOREGROUND="151"
-  typeset -g POWERLEVEL9K_NVM_BACKGROUND="166"
+  typeset -g POWERLEVEL9K_{NVM,RBENV}_FOREGROUND="221"
+  typeset -g POWERLEVEL9K_{NVM,RBENV}_BACKGROUND="062"
   typeset -g POWERLEVEL9K_STATUS_VERBOSE=true
   typeset -g POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
   typeset -g POWERLEVEL9K_VCS_GIT_HOOKS=(vcs-detect-changes git-untracked git-aheadbehind git-remotebranch git-tagname)
@@ -243,7 +241,7 @@
   # Replace removed segment suffixes with this symbol.
   typeset -g POWERLEVEL9K_SHORTEN_DELIMITER=
   # Color of the shortened directory segments.
-  # typeset -g POWERLEVEL9K_DIR_SHORTENED_FOREGROUND=103
+  typeset -g POWERLEVEL9K_DIR_SHORTENED_FOREGROUND=136
   # Color of the anchor directory segments. Anchor segments are never shortened. The first
   # segment is always an anchor.
   typeset -g POWERLEVEL9K_DIR_ANCHOR_FOREGROUND="202"
@@ -335,7 +333,11 @@
   #   typeset -g POWERLEVEL9K_DIR_WORK_SHORTENED_FOREGROUND=103
   #   typeset -g POWERLEVEL9K_DIR_WORK_ANCHOR_FOREGROUND=39
   #
-  # typeset -g POWERLEVEL9K_DIR_CLASSES=()
+  typeset -g POWERLEVEL9K_DIR_CLASSES=(
+    '/etc(/*)#' ETC ''
+    '~'        HOME ''
+    '~(/*)#' HOME_SUBFOLDER ''
+    '*'      DEFAULT '')
 
   #####################################[ vcs: git status ]######################################
   # Branch icon. Set this parameter to '\uF126 ' for the popular Powerline branch icon.
