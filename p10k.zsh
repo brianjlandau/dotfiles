@@ -28,13 +28,14 @@
   fi
 
   typeset -g POWERLEVEL9K_DIR_DEFAULT_FOREGROUND="144"
+  typeset -g POWERLEVEL9K_DIR_DEFAULT_BACKGROUND="088"
   typeset -g POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND="144"
   typeset -g POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND="025"
   typeset -g POWERLEVEL9K_DIR_ETC_BACKGROUND="057"
   typeset -g POWERLEVEL9K_DIR_ETC_FOREGROUND="grey85"
   typeset -g POWERLEVEL9K_DIR_HOME_FOREGROUND="grey85"
-  typeset -g POWERLEVEL9K_{NVM,RBENV}_FOREGROUND="221"
-  typeset -g POWERLEVEL9K_{NVM,RBENV}_BACKGROUND="062"
+  typeset -g POWERLEVEL9K_{NVM,RBENV}_FOREGROUND="079"
+  typeset -g POWERLEVEL9K_{NVM,RBENV}_BACKGROUND="000"
   typeset -g POWERLEVEL9K_STATUS_VERBOSE=true
   typeset -g POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
   typeset -g POWERLEVEL9K_VCS_GIT_HOOKS=(vcs-detect-changes git-untracked git-aheadbehind git-remotebranch git-tagname)
@@ -182,7 +183,7 @@
   # POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR="\uE0C6"
   # POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR="\uE0B6"
   # Separator between same-color segments on the left.
-  typeset -g POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR='%242F\uE0C4'
+  typeset -g POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR='%144F\uE0C4'
   # Separator between same-color segments on the right.
   typeset -g POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR='%242F\uE0B7'
   # Separator between different-color segments on the left.
@@ -237,7 +238,7 @@
   # typeset -g POWERLEVEL9K_DIR_FOREGROUND=31
   # If directory is too long, shorten some of its segments to the shortest possible unique
   # prefix. The shortened directory can be tab-completed to the original.
-  # typeset -g POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_unique
+  typeset -g POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_unique
   # Replace removed segment suffixes with this symbol.
   typeset -g POWERLEVEL9K_SHORTEN_DELIMITER=
   # Color of the shortened directory segments.
@@ -291,7 +292,7 @@
   typeset -g POWERLEVEL9K_DIR_HYPERLINK=true
 
   # Enable special styling for non-writable directories.
-  typeset -g POWERLEVEL9K_DIR_SHOW_WRITABLE=true
+  typeset -g POWERLEVEL9K_DIR_SHOW_WRITABLE=false
   # Show this icon when the current directory is not writable. POWERLEVEL9K_DIR_SHOW_WRITABLE
   # above must be set to true for this parameter to have effect.
   # typeset -g POWERLEVEL9K_DIR_NOT_WRITABLE_VISUAL_IDENTIFIER_EXPANSION='⭐'
@@ -334,10 +335,10 @@
   #   typeset -g POWERLEVEL9K_DIR_WORK_ANCHOR_FOREGROUND=39
   #
   typeset -g POWERLEVEL9K_DIR_CLASSES=(
-    '/etc(/*)#' ETC ''
-    '~'        HOME ''
-    '~(/*)#' HOME_SUBFOLDER ''
-    '*'      DEFAULT '')
+    '/etc(/*)#' ETC ' '
+    '~'        HOME ' '
+    '~(/*)#' HOME_SUBFOLDER ' '
+    '*'      DEFAULT ' ')
 
   #####################################[ vcs: git status ]######################################
   # Branch icon. Set this parameter to '\uF126 ' for the popular Powerline branch icon.
