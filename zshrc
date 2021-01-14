@@ -20,6 +20,7 @@ export WORDCHARS="*?_-.[]~=&;!#$%^(){}<>"
 PATH="/usr/local/sbin:$PATH"
 # Setup my personal shell scripts path
 PATH="$HOME/bin:$PATH"
+PATH="/usr/local/anaconda3/bin:$PATH"
 export PATH
 # /PATH config
 
@@ -98,10 +99,12 @@ bindkey '^[[B' history-substring-search-down
 
 cycle_prompt_char() {
   typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_VIINS_CONTENT_EXPANSION=${default_prompt_symbols[$(( $RANDOM % ${#default_prompt_symbols[@]} + 1 ))]}
+  p10k reload
 }
 
 cycle_error_prompt_char() {
   typeset -g POWERLEVEL9K_PROMPT_CHAR_ERROR_VIINS_CONTENT_EXPANSION=${error_prompt_symbols[$(( $RANDOM % ${#error_prompt_symbols[@]} + 1 ))]}
+  p10k reload
 }
 
 # POWERLEVEL9K theme config
@@ -141,6 +144,7 @@ alias mux="tmuxinator"
 export RUBY_GC_HEAP_INIT_SLOTS=700000
 export RUBY_GC_HEAP_FREE_SLOTS=300000
 export RUBY_GC_HEAP_GROWTH_FACTOR=1.2
+export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
 
 alias be='bundle exec'
 alias brk='bin/rake'
@@ -265,6 +269,8 @@ nvm_auto_switch
  eval "$(rbenv init --no-rehash - zsh)"
 
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+
+# node "/usr/local/opt/yvm/yvm.js" configure-shell --yvmDir "/usr/local/opt/yvm"
 # /Shell extensions
 
 # SSH setup
